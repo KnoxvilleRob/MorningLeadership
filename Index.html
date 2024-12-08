@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morning Leadership</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .vision-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .scripture-block {
+            border-left: 4px solid #1d4ed8;
+            padding-left: 12px;
+            margin: 12px 0;
+        }
+
+        .milestone-marker {
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .milestone-marker::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #1d4ed8;
+            transform: translateY(-50%);
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-4">
+    <!-- Morning Overview -->
+    <div class="vision-card p-4 mb-4">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-xl font-bold">Morning Leadership</h1>
+            <span class="text-sm text-gray-600" id="currentTime"></span>
+        </div>
+
+        <!-- Vision Statement -->
+        <div class="bg-blue-50 rounded-lg p-4 mb-4">
+            <h2 class="font-semibold mb-2">Today's Focus</h2>
+            <p class="text-sm text-gray-700">"Building a life of purpose through faith, family, and faithful stewardship"</p>
+        </div>
+
+        <!-- Progress Metrics -->
+        <div class="grid grid-cols-3 gap-4">
+            <div class="text-center">
+                <div class="text-sm text-gray-600">Spiritual Growth</div>
+                <div class="text-lg font-bold">Daily Walk</div>
+            </div>
+            <div class="text-center">
+                <div class="text-sm text-gray-600">Business Transition</div>
+                <div class="text-lg font-bold" id="transitionProgress">43%</div>
+            </div>
+            <div class="text-center">
+                <div class="text-sm text-gray-600">Investment Goals</div>
+                <div class="text-lg font-bold" id="investmentProgress">35%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Morning Routine -->
+    <div class="vision-card p-4 mb-4">
+        <h2 class="font-bold mb-4">Morning Disciplines</h2>
+
+        <!-- Scripture & Prayer -->
+        <div class="mb-6">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="font-semibold">1. Scripture & Prayer (5:00-5:45)</h3>
+                <button onclick="openESV()" class="text-blue-600 text-sm">Open ESV</button>
+            </div>
+            <div class="scripture-block">
+                <p class="text-sm text-gray-600 mb-1">Today's Reading</p>
+                <p class="text-sm" id="dailyScripture"></p>
+            </div>
+            <div class="flex gap-2 mt-2">
+                <button class="text-sm bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Prayer List</button>
+                <button class="text-sm bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Journal</button>
+            </div>
+        </div>
+
+        <!-- Physical Stewardship -->
+        <div class="mb-6">
+            <h3 class="font-semibold mb-2">2. Physical Stewardship (5:45-6:30)</h3>
+            <div class="text-sm text-gray-600">
+                <div class="flex items-center gap-2 mb-1">
+                    <input type="checkbox" class="w-4 h-4">
+                    <span>Morning Walk/Exercise</span>
+                </div>
+                <div class="flex items-center gap-2 mb-1">
+                    <input type="checkbox" class="w-4 h-4">
+                    <span>Nutrition Planning</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Leadership -->
+        <div class="mb-6">
+            <h3 class="font-semibold mb-2">3. Business Leadership (6:30-7:15)</h3>
+            <div class="text-sm text-gray-600">
+                <div class="flex items-center gap-2 mb-1">
+                    <input type="checkbox" class="w-4 h-4">
+                    <span>Relationship Nurturing (5/5/5)</span>
+                </div>
+                <div class="flex items-center gap-2 mb-1">
+                    <input type="checkbox" class="w-4 h-4">
+                    <span>Investment Property Review</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" class="w-4 h-4">
+                    <span>Writing Progress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vision Progress -->
+    <div class="vision-card p-4">
+        <h2 class="font-bold mb-4">Vision Progress</h2>
+        <div class="space-y-4">
+            <div class="milestone-marker">
+                <div class="text-sm">
+                    <div class="font-semibold">Howard's Pond Development</div>
+                    <div class="text-gray-600">Cottage Expansion Plan</div>
+                </div>
+            </div>
+            <div class="milestone-marker">
+                <div class="text-sm">
+                    <div class="font-semibold">Novel Writing</div>
+                    <div class="text-gray-600">Current Project Progress</div>
+                </div>
+            </div>
+            <div class="milestone-marker">
+                <div class="text-sm">
+                    <div class="font-semibold">Next European Adventure</div>
+                    <div class="text-gray-600">Trip Planning</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Time and date formatting
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('currentTime').textContent = 
+                now.toLocaleTimeString('en-US', { 
+                    hour: 'numeric', 
+                    minute: '2-digit', 
+                    hour12: true 
+                });
+        }
+
+        // Scripture integration
+        function loadDailyScripture() {
+            // ESV API integration would go here
+            document.getElementById('dailyScripture').textContent = 
+                "Loading today's scripture...";
+        }
+
+        // Progress tracking
+        function updateProgress() {
+            // Regular progress updates
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateDateTime();
+            setInterval(updateDateTime, 60000);
+            loadDailyScripture();
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
